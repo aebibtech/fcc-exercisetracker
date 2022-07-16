@@ -21,8 +21,12 @@ app.get('/', (req, res) => {
 
 // Mongoose
 const goose = require('mongoose');
-const MONGO_URI = process.env['MONGO_URI'];
-goose.connect(MONGO_URI, { useNewUrlParser: true });
+const MONGO_URI = "mongodb+srv://aebibtech:1234@cluster0.brnejx7.mongodb.net/exercise?retryWrites=true&w=majority" // process.env['MONGO_URI'];
+try {
+  goose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true }, () => { console.log("Mongoose is connected.") });
+} catch (e) {
+  console.log("could not connect.")
+}
 
 // Schema and Model
 const Schema = goose.Schema;
